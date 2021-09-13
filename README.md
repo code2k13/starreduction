@@ -1,5 +1,7 @@
 # starreduction
-A GAN model trained to remove stars from greyscale images
+A GAN model trained to remove stars from astronomical images. Code was inspired from a [sample at Tensorflow's website](https://www.tensorflow.org/tutorials/generative/pix2pix)
+
+![images/star_reduction_title.png](images/star_reduction_title.png)
 
 
 ## Attribution
