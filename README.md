@@ -19,6 +19,14 @@ python removestars.py image_with_stars.jpg  image_without_stars.jpg
 
 > Only supports 1024x1024 images. So this means that your images will be downscaled (or upscaled) to match the resolution with padding before processing.
 
+## Training model on your images
+
+The [notebook](train/star-removal-from-astronomical-images-with-pix2pix.ipynb) is available in the train folder.
+
+You can also view/run it on Kaggle:
+[https://www.kaggle.com/finalepoch/star-removal-from-astronomical-images-with-pix2pix](https://www.kaggle.com/finalepoch/star-removal-from-astronomical-images-with-pix2pix)
+
+
 ## Attribution
 
 The training images used in this code were sourced from Wikimedia Commons and processed using GIMP.
