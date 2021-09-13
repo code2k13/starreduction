@@ -1,5 +1,5 @@
 # starreduction
-A GAN model trained to remove stars from astronomical images. Code was inspired from a [sample at Tensorflow's website](https://www.tensorflow.org/tutorials/generative/pix2pix)
+A GAN model trained to remove stars from astronomical images. Code was inspired from a [sample at Tensorflow's website](https://www.tensorflow.org/tutorials/generative/pix2pix). The training data consists of only two images. One image of the Antenna Galaxy and another is a starmap that was created from a star cluster image. Here is how the results look like:
 
 ![images/star_reduction_title.png](images/example.jpg)
 
