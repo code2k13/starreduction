@@ -1,7 +1,11 @@
 # starreduction
 A GAN model trained to remove stars from astronomical images. Code was inspired from a [sample at Tensorflow's website](https://www.tensorflow.org/tutorials/generative/pix2pix). The training data consists of only two images. One image of the Antenna Galaxy and another is a starmap that was created from a star cluster image. Here is how the results look like:
 
-![images/star_reduction_title.png](images/example.jpg)
+![images/example2.png](images/example2.jpg)
+
+![images/example.png](images/example.jpg)
+
+
 
 
 ## Usage
@@ -12,12 +16,19 @@ Clone the repository and navigate to the 'starreduction' folder. Install require
 pip install -r requirements.txt
 ```
 
+Additionally you may also have to install lfs support for git
+```
+sudo apt-get install git-lfs
+git lfs pull
+```
+
 Run inference on image. 
 ```shell
 python removestars.py image_with_stars.jpg  image_without_stars.jpg
 ```
 
-> Only supports 1024x1024 images. So this means that your images will be downscaled (or upscaled) to match the resolution with padding before processing.
+> Supprots greyscale and RGB images. Alpha channel (if any) in the source image is removed during processing. Gives issues on some types of TIFF files.
+
 
 ## Training model on your images
 
