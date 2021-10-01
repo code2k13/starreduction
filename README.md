@@ -18,6 +18,8 @@ pip install -r requirements.txt
 
 Additionally you may also have to install lfs support for git
 ```
+git clone https://github.com/code2k13/starreduction.git
+cd starreduction
 sudo apt-get install git-lfs
 git lfs pull
 ```
