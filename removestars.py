@@ -1,17 +1,23 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-import tensorflow as tf
-import model
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+
+import model
 import time
 from PIL import Image, ImageFilter,ImageEnhance
 import random 
 import numpy as np
 import sys
+from tqdm import tqdm
 
 IMG_SIZE = 1024
 all_outputs = 1
 pad_width = 24
+total_steps = 0
+progress_bar = None
 
 args = sys.argv 
 if len(args) != 3:
@@ -21,6 +27,7 @@ if len(args) != 3:
 
 
 def process_channel(channel,pad_width,input_image_size):
+    global progress_bar,step_size
     output_image =  Image.new('L', input_image_size)   
     for i in range(0,int(channel.size[0]/IMG_SIZE)):
         for j in range(0,int(channel.size[1]/IMG_SIZE)):         
@@ -36,7 +43,8 @@ def process_channel(channel,pad_width,input_image_size):
             predicted_section = Image.fromarray(predicted_section).convert('L')            
             predicted_section = predicted_section.crop((pad_width,pad_width,IMG_SIZE-pad_width,IMG_SIZE-pad_width))
             predicted_section = predicted_section.resize((IMG_SIZE,IMG_SIZE))   
-            output_image.paste(predicted_section, (i*IMG_SIZE,j*IMG_SIZE),  mask=None)            
+            output_image.paste(predicted_section, (i*IMG_SIZE,j*IMG_SIZE),  mask=None)          
+            progress_bar.update(step_size)       
     return output_image
 
 G2 = model.Generator()
@@ -48,25 +56,32 @@ size = source_image.size
 max_dimension = max(size)
 
 a,b = divmod(max_dimension,1024)
-if a > 0 and b !=0 :
+if b !=0 :
   max_dimension = max_dimension + b
  
 input_image = source_image.crop((0,0,max_dimension,max_dimension))
 
+
 if mode == 'L':  
+  total_steps = (max_dimension/1024)**2 
+  step_size = int((1/total_steps)*100)
+  progress_bar = tqdm(total=100)
   output = process_channel(input_image,pad_width,input_image.size)
   output = output.crop((0,0,size[0],size[1]))
   output.save(args[2])
+ 
 elif mode == 'RGB' or mode == 'RGBA':
+  total_steps = 3*(max_dimension/1024)**2
+  step_size = int((1/total_steps)*100)  
+  progress_bar = tqdm(total=100)
   channels = Image.Image.split(input_image)
   all_outputs  = []
   for channel in channels[0:3]:
     channel_output = process_channel(channel,pad_width,input_image.size)
     channel_output = channel_output.crop((0,0,size[0],size[1]))
-    all_outputs.append(channel_output)
- 
+    all_outputs.append(channel_output) 
   output =Image.merge('RGB', (all_outputs[0],all_outputs[1],all_outputs[2]))
-  output.save(args[2])
+  output.save(args[2])  
 else:
   print("Invalid mode for input image:", mode)
   print("Only grayscale(L) and RGB(RGBA) images are supported.")
