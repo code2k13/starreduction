@@ -66,14 +66,16 @@ if mode == 'L':
   total_steps = (max_dimension/1024)**2 
   step_size = int((1/total_steps)*100)
   progress_bar = tqdm(total=100)
+  progress_bar.update(step_size)
   output = process_channel(input_image,pad_width,input_image.size)
   output = output.crop((0,0,size[0],size[1]))
   output.save(args[2])
- 
+  progress_bar.update(step_size)
 elif mode == 'RGB' or mode == 'RGBA':
   total_steps = 3*(max_dimension/1024)**2
   step_size = int((1/total_steps)*100)  
   progress_bar = tqdm(total=100)
+  progress_bar.update(step_size)
   channels = Image.Image.split(input_image)
   all_outputs  = []
   for channel in channels[0:3]:
@@ -81,7 +83,8 @@ elif mode == 'RGB' or mode == 'RGBA':
     channel_output = channel_output.crop((0,0,size[0],size[1]))
     all_outputs.append(channel_output) 
   output =Image.merge('RGB', (all_outputs[0],all_outputs[1],all_outputs[2]))
-  output.save(args[2])  
+  output.save(args[2])
+  progress_bar.update(step_size)  
 else:
   print("Invalid mode for input image:", mode)
   print("Only grayscale(L) and RGB(RGBA) images are supported.")
