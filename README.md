@@ -8,8 +8,15 @@ A GAN model trained to remove stars from astronomical images. Code was inspired 
 
 
 
-## Usage
+## Running using Docker (Recommended)
 
+```
+docker run   -v $PWD:/usr/src/app/starreduction/data   -it code2k13/starreduction  /bin/bash -c "./removestars.py ./data/example.jpg  ./data/example_starless.jpg"
+```
+Note that *$PWD* refers to your current working directory. In the above example it is assumed that the file *example.jpg* resides in your current working directory. This directory is mounted as a volume with the path */usr/src/app/starreduction/data* inside the docker container. The output image *example_starless.jpg* will also be written to same directory.
+
+
+## Running without Docker
 Clone the repository and navigate to the 'starreduction' folder. Install required packages :
 
 ```shell
