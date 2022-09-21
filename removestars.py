@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
@@ -40,7 +40,7 @@ def process_channel(channel,pad_width,input_image_size):
             current_tile = current_tile.resize((IMG_SIZE-pad_width*2,IMG_SIZE-pad_width*2))
             blank_image.paste(current_tile,(pad_width,pad_width))
             blank_image  = np.asarray(blank_image,dtype="float16").reshape(1,IMG_SIZE,IMG_SIZE)/255
-            predicted_section = G2.predict(blank_image)            
+            predicted_section = G2.predict(blank_image,verbose=0)            
             predicted_section = predicted_section.reshape(IMG_SIZE,IMG_SIZE)*255 
             predicted_section = Image.fromarray(predicted_section).convert('L')            
             predicted_section = predicted_section.crop((pad_width,pad_width,IMG_SIZE-pad_width,IMG_SIZE-pad_width))
