@@ -69,7 +69,7 @@ try:
     max_dimension = (a+1)*IMG_SIZE
   
   input_image = source_image.crop((0,0,max_dimension,max_dimension))
-  progress_bar = tqdm(total=100,leave=True)
+  progress_bar = tqdm(total=100)
 
   if mode == 'L':  
     total_steps = math.ceil((max_dimension/IMG_SIZE)**2) 
