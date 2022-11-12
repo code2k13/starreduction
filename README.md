@@ -43,7 +43,7 @@ python removestars.py image_with_stars.jpg  image_without_stars.jpg
 
 
 ## Trying out the model in a web browser
-Here is link to a online demo of star reduction created using a trained model, TFLite and ReactJS. Please use a **desktop browser** to access the demo (for memory and performance reasons). The demo runs locally inside your browser, no data outside of your computer. Here is the link to the demo : https://ashishware.com/static/star_removal/index.html
+Here is link to a online demo of star reduction created using a trained model, TFJS and ReactJS. Please use a **desktop browser** to access the demo (for memory and performance reasons). The demo runs locally inside your browser, no data outside of your computer. Here is the link to the demo : https://ashishware.com/static/star_removal/index.html
 
 ![](https://ashishware.com/images/star_removal_demo1.jpg)
 
