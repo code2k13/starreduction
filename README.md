@@ -1,7 +1,5 @@
 # Star reduction in deep sky images
 
-![images/star_removal.gif](images/star_removal.gif)
-
 A GAN model trained to remove stars from astronomical images. Code was inspired from a [sample at Tensorflow's website](https://www.tensorflow.org/tutorials/generative/pix2pix). The training data consists of only two images. One image of the Antenna Galaxy and another is a starmap that was created from a star cluster image. Here is how the results look like:
 
 ![images/example2.png](images/example2.jpg)
@@ -43,6 +41,11 @@ python removestars.py image_with_stars.jpg  image_without_stars.jpg
 
 > Supprots greyscale and RGB images. Alpha channel (if any) in the source image is removed during processing. Gives issues on some types of TIFF files.
 
+
+## Trying out the model in a web browser
+Here is link to a online demo of star reduction created using a trained model, TFLite and ReactJS. Please use a **desktop browser** to access the demo (for memory and performance reasons). The demo runs locally inside your browser, no data outside of your computer. Here is the link to the demo : https://ashishware.com/static/star_removal/index.html
+
+![](https://ashishware.com/images/star_removal_demo1.jpg)
 
 ## Training model on your images
 
