@@ -2,3 +2,4 @@ tensorflow
 numpy
 pillow
 tqdm
+tensorflowjs

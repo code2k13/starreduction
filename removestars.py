@@ -14,9 +14,9 @@ import math
 
 
 IMG_SIZE = 512
-MODEL_SIZE = 1024
+MODEL_SIZE = 512
 all_outputs = 1
-pad_width = 2
+pad_width = 8
 total_steps = 0
 progress_bar = None
 current_progress= 0
@@ -35,9 +35,9 @@ def process_tile(channel,i,j,pad_width,model,output_image):
   current_tile = current_tile.resize((IMG_SIZE-pad_width*2,IMG_SIZE-pad_width*2))
   blank_image.paste(current_tile,(pad_width,pad_width))
   blank_image = blank_image.resize((MODEL_SIZE,MODEL_SIZE))
-  blank_image  = np.asarray(blank_image,dtype="float16").reshape(1,MODEL_SIZE,MODEL_SIZE)/512
+  blank_image  = np.asarray(blank_image,dtype="float32").reshape(1,MODEL_SIZE,MODEL_SIZE)/512
   predicted_section = model.predict(blank_image,verbose=0)      
-  predicted_section = predicted_section.reshape(MODEL_SIZE,MODEL_SIZE)*1024
+  predicted_section = predicted_section.reshape(MODEL_SIZE,MODEL_SIZE)*512
   predicted_section = Image.fromarray(predicted_section).convert('L')
   predicted_section =  predicted_section.resize((IMG_SIZE,IMG_SIZE))            
   predicted_section = predicted_section.crop((pad_width,pad_width,IMG_SIZE-pad_width,IMG_SIZE-pad_width))

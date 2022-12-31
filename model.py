@@ -1,6 +1,6 @@
 import tensorflow as tf 
 
-IMG_SIZE = 1024
+IMG_SIZE = 512
 OUTPUT_CHANNELS = 1
 
 def downsample(filters, size, apply_batchnorm=True,strides = 2,name=''):
