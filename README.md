@@ -1,5 +1,13 @@
 # Star reduction in deep sky images
 
+
+
+| :warning:        | This repository has been archived. Please checkout my new shiny tool (Starrem2k13) for star removal : https://code2k13.github.io/starrem2k13/        |
+|---------------|:------------------------|
+
+ 
+
+
 A GAN model trained to remove stars from astronomical images. Code was inspired from a [sample at Tensorflow's website](https://www.tensorflow.org/tutorials/generative/pix2pix). The training data consists of only two images. One image of the Helix nebula and another is a starmap that was created from a star cluster image. Here is how the results look like:
 
 ![images/example2.png](images/example2.jpg)
